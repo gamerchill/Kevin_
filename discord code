@@ -9,20 +9,43 @@ bot = commands.Bot(command_prefix='.', intents=discord.Intents.all())
 async def on_ready():
      print("Logged in")       #login message
 
-@bot.command()   #trying to get "test" to return from .ping
+@bot.command()   #trying to get latency to return from .ping
 async def ping(ctx):
     await ctx.reply(f"pong! {round(bot.latency* 1000)} ms")
 
+@bot.command()     # sends this repository
+async def repo(ctx):
+     await ctx.send("https://github.com/gamerchill/testbot/blob/main/discord%20code")
+
+@bot.command()    #this is basically useless now
+async def hello(ctx):
+     await ctx.reply("embed is currently disabled.")
+
+@bot.command()      #the help command
+async def needhelp(ctx):
+     await ctx.reply("Why does @bot.command and @bot.event not work together if put together?\nCommands: .ping\n.repo\n.needhelp")
+
+@bot.command()            # repeats whatever you say after .say
+async def say(ctx, *, arg):
+     await ctx.channel.send(arg)
+
+@bot.command()                    #sends embed
+async def embed(ctx, member:discord.Member = None):
+    if member == None:
+        member = ctx.author
+
+    name = member.display_name
+    pfp = member.display_avatar
+
+    embed = discord.Embed(title = "This is a title", description = "this is a description", color=discord.Color.random())
+    embed.set_author(name=f"{name}")
+    embed.set_thumbnail(url=f"{pfp}")
+    embed.add_field(name = "this is field 1", value ="this is a field")
+    embed.add_field(name="this is another field", value = "this field inline is true", inline=True)
+    embed.add_field(name="this is field 3", value = "this inline is false", inline=False)
+    embed.set_footer(text=f"{name} set this embed!")
+
+    await ctx.send(embed=embed)
 
 
-'''@bot.event
-async def on_message(message):
-    if message.content.startswith('!embed'):
-        embedVar = discord.Embed(title="Title", description="Desc", color=0xc072f7)
-        embedVar.add_field(name="Field1", value="hi", inline=False)
-        embedVar.add_field(name="Field2", value="hi2", inline=False)
-        await message.channel.send(embed=embedVar)
-
-pass_context = True
-'''
 bot.run(token)
