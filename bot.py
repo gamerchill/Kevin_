@@ -73,6 +73,6 @@ async def load():
             await bot.load_extension(f'cogs.{filename[:-3]}')
 async def main():
     await load()
-    await bot.start('MTA0MjMyMjkxMTQ4ODM3NjkxMg.GveLnr.pw5IDGwV6YSa0xKbziLHbyZEY8IYxA03Vs9mNs')
+    await bot.start("botToken")
 
 asyncio.run(main())
