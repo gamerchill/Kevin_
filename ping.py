@@ -7,7 +7,7 @@ class Ping(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Ping cog online")
+        print("Ping cog online") #sends message that the cog is online
 
     @commands.command()
     async def ping(self, ctx):
